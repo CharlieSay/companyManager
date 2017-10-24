@@ -32,7 +32,9 @@ public class Company {
         System.out.println("========================");
         System.out.format("%10s - %10S","Employee",e.getName()+"\n");
         System.out.format("%10s - %10S","Pay Rate",e.getPayRate()+"\n");
-        System.out.format("%10s - %8S","Level",e.getEmployeeType()+"\n");
+        String employeeTypeFormat = (""+e.getEmployeeType());
+        employeeTypeFormat = employeeTypeFormat.replaceAll("[^a-zA-Z0-9]", " ");
+        System.out.format("%10s - %8S","Level",employeeTypeFormat+"\n");
         System.out.println("========================");
     }
 
@@ -40,13 +42,12 @@ public class Company {
         if (e.getEmployeeType() == eT){
             return false;
         }else if (!(e.getEmployeeType() == eT)){
-            if (eT.getLevel(eT)<e.getEmployeeType().getLevel(e.getEmployeeType())){
+            if (eT.getLevel(e.getEmployeeType())< eT.getLevel(eT)){
                 e.setLevel(eT);
                 return true;
             }else{
                 return false;
             }
-
         }else{
             return false;
         }

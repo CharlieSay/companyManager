@@ -8,8 +8,8 @@ public class testing{
     @Test
     public void testForEmployeeLevel(){
      Employee em = new Employee(employeeType.EXECUTIVE,"Dave");
-        assertEquals(employeeType.EXECUTIVE,em.getEmployeeType());
-     assertEquals("Dave",em.getName());
+        Assert.assertEquals(employeeType.EXECUTIVE,em.getEmployeeType());
+     Assert.assertEquals("Dave",em.getName());
     }
 
     @Test
@@ -29,9 +29,9 @@ public class testing{
     @Test
     public void testForEmployeesAll4Levels(){
         Company Company = new Company();
-        Company.newEmployee(employeeType.HOURLYEMPLOYEE,"Dave");
+        Company.newEmployee(employeeType.HOURLY_EMPLOYEE,"Dave");
         Company.newEmployee(employeeType.EXECUTIVE,"Ralph");
-        Company.newEmployee(employeeType.SALARIEDEMPLOYEE,"Sarah");
+        Company.newEmployee(employeeType.SALARIED_EMPLOYEE,"Sarah");
         Company.newEmployee(employeeType.MANAGER,"Joelan");
         Company.getEmployeeTable();
     }
@@ -57,18 +57,18 @@ public class testing{
     @Test
     public void testGettingMultipleEmployeeLevels(){
         Company Company = new Company();
-        Company.newEmployee(employeeType.HOURLYEMPLOYEE,"Dave");
+        Company.newEmployee(employeeType.HOURLY_EMPLOYEE,"Dave");
         Company.newEmployee(employeeType.EXECUTIVE,"Ralph");
-        Company.newEmployee(employeeType.SALARIEDEMPLOYEE,"Sarah");
+        Company.newEmployee(employeeType.SALARIED_EMPLOYEE,"Sarah");
         Company.newEmployee(employeeType.MANAGER,"Joelan");
-        Assert.assertEquals(employeeType.HOURLYEMPLOYEE,Company.getSpecificEmployee("Dave").getEmployeeType());
+        Assert.assertEquals(employeeType.HOURLY_EMPLOYEE,Company.getSpecificEmployee("Dave").getEmployeeType());
         Assert.assertEquals(employeeType.EXECUTIVE,Company.getSpecificEmployee("Ralph").getEmployeeType());
     }
 
     @Test
     public void testHireThenFireSomeone(){
         Company Company = new Company();
-        Company.newEmployee(employeeType.HOURLYEMPLOYEE,"Dave");
+        Company.newEmployee(employeeType.HOURLY_EMPLOYEE,"Dave");
         Company.newEmployee(employeeType.EXECUTIVE,"Ralph");
         Company.getEmployeeTable();
         Company.fireEmployee("Dave");
@@ -78,21 +78,30 @@ public class testing{
     @Test
     public void getAEmployeeStatus(){
         Company Company = new Company();
-        Company.newEmployee(employeeType.HOURLYEMPLOYEE,"Dave");
+        Company.newEmployee(employeeType.HOURLY_EMPLOYEE,"Dave");
         Company.newEmployee(employeeType.EXECUTIVE,"Ralph");
         Company.getFormattedEmployee("Ralph");
         Company.getFormattedEmployee("Dave");
     }
 
     @Test
-    public void raiseEmployeeLevel(){
+    public void raiseMultipleEmployeeLevels(){
         Company Company = new Company();
-        Company.newEmployee(employeeType.HOURLYEMPLOYEE,"Dave");
-        Company.newEmployee(employeeType.EXECUTIVE,"Ralph");
-        Company.newEmployee(employeeType.SALARIEDEMPLOYEE,"Sarah");
-        Company.newEmployee(employeeType.MANAGER,"Joelan");
+        Company.newEmployee(employeeType.HOURLY_EMPLOYEE,"Dave");
+        Company.newEmployee(employeeType.SALARIED_EMPLOYEE,"Steph");
+        Company.newEmployee(employeeType.MANAGER,"Joanne");
+        Assert.assertEquals(true,Company.raiseEmployee(Company.getSpecificEmployee("Dave"), employeeType.SALARIED_EMPLOYEE));
+        Assert.assertEquals(true,Company.raiseEmployee(Company.getSpecificEmployee("Steph"), employeeType.MANAGER));
+        Assert.assertEquals(true,Company.raiseEmployee(Company.getSpecificEmployee("Joanne"), employeeType.EXECUTIVE));
+    }
+
+    @Test
+    public void raiseEmployeeLevelToEqual(){
+        Company Company = new Company();
+        Company.newEmployee(employeeType.HOURLY_EMPLOYEE,"Dave");
         Employee e = Company.getSpecificEmployee("Dave");
         System.out.println("Current Role : "+e.getEmployeeType());
-        assertEquals(true,Company.raiseEmployee(Company.getSpecificEmployee("Dave"),employeeType.SALARIEDEMPLOYEE));
+        Assert.assertEquals(false,Company.raiseEmployee(Company.getSpecificEmployee("Dave"), employeeType.HOURLY_EMPLOYEE));
     }
+
 }

@@ -9,10 +9,10 @@ public class Employee {
         this.eT = ePassed;
         this.name = namePassed;
         switch (ePassed){
-            case HOURLYEMPLOYEE:
+            case HOURLY_EMPLOYEE:
                 payRate = 8.20;
                 break;
-            case SALARIEDEMPLOYEE:
+            case SALARIED_EMPLOYEE:
                 payRate = 25.00;
                 break;
             case MANAGER:
