@@ -1,9 +1,12 @@
+import java.util.Iterator;
+import java.util.Map;
+
 public class Employee {
 
     private employeeType eT;
     private String name;
     private Double payRate;
-    private Double uniqueEMPLOYEEIDENTIFIER;
+    private int uniqueEMPLOYEEIDENTIFIER;
 
     public Employee(employeeType ePassed, String namePassed) {
         this.eT = ePassed;
@@ -22,6 +25,28 @@ public class Employee {
                 payRate = 110.21;
                 break;
         }
+        setUniqueEMPLOYEEIDENTIFIER();
+    }
+
+    public void setUniqueEMPLOYEEIDENTIFIER() {
+        Map mp = Company.EmployeeTable;
+        Iterator it = mp.entrySet().iterator();
+        int x = 0;
+        if (mp.size() == 0){
+            this.uniqueEMPLOYEEIDENTIFIER=1;
+        }else{
+            while (it.hasNext()) {
+                x++;
+                it.next();
+                if (mp.size() == x && mp.size() >= 1) {
+                    this.uniqueEMPLOYEEIDENTIFIER = (x+1);
+                }
+            }
+        }
+    }
+
+    public int getUniqueEMPLOYEEIDENTIFIER() {
+        return uniqueEMPLOYEEIDENTIFIER;
     }
 
     public employeeType getEmployeeType() {

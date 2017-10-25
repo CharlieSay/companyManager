@@ -49,7 +49,7 @@ public class testing{
     public void testGettingMultipleEmployeeName(){
         Company Company = new Company();
         Company.newEmployee(employeeType.EXECUTIVE,"Dave");
-        Company.newEmployee(employeeType.EXECUTIVE,"Ralph");
+        Company.newEmployee(employeeType.SALARIED_EMPLOYEE,"Ralph");
         Assert.assertEquals("Dave",Company.getSpecificEmployee("Dave").getName());
         Assert.assertEquals("Ralph",Company.getSpecificEmployee("Ralph").getName());
     }
@@ -74,6 +74,15 @@ public class testing{
         Company.fireEmployee("Dave");
         Company.getEmployeeTable();
     }
+
+    @Test
+    public void fireSomeoneWhoDoesntExist(){
+        Company Company = new Company();
+        Company.newEmployee(employeeType.HOURLY_EMPLOYEE,"Dave");
+        Company.newEmployee(employeeType.EXECUTIVE,"Ralph");
+        assertEquals(false,Company.fireEmployee("Bob"));
+    }
+
 
     @Test
     public void getAEmployeeStatus(){
@@ -102,6 +111,25 @@ public class testing{
         Employee e = Company.getSpecificEmployee("Dave");
         System.out.println("Current Role : "+e.getEmployeeType());
         Assert.assertEquals(false,Company.raiseEmployee(Company.getSpecificEmployee("Dave"), employeeType.HOURLY_EMPLOYEE));
+    }
+
+    @Test
+    public void uniqueIDTest1(){
+        Company Company = new Company();
+        Company.newEmployee(employeeType.HOURLY_EMPLOYEE,"Dave");
+        Company.newEmployee(employeeType.SALARIED_EMPLOYEE,"Steph");
+        Company.newEmployee(employeeType.MANAGER,"Joanne");
+        Assert.assertEquals(1,Company.getSpecificEmployee("Dave").getUniqueEMPLOYEEIDENTIFIER());
+    }
+
+    @Test
+    public void uniqueIDTestMoreThanOne() {
+        Company Company = new Company();
+        Company.newEmployee(employeeType.HOURLY_EMPLOYEE, "Dave");
+        Company.newEmployee(employeeType.SALARIED_EMPLOYEE, "Steph");
+        Company.newEmployee(employeeType.MANAGER, "Joanne");
+        Company.getEmployeeTable();
+        Assert.assertEquals(1, Company.getSpecificEmployee("Dave").getUniqueEMPLOYEEIDENTIFIER());
     }
 
 }
