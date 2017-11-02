@@ -1,3 +1,5 @@
+package Main;
+
 public enum employeeType {
 
     HOURLY_EMPLOYEE,

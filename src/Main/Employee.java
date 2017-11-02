@@ -1,16 +1,20 @@
+package Main;
+
 import java.util.Iterator;
 import java.util.Map;
 
 public class Employee {
 
     private employeeType eT;
-    private String name;
+    private String firstName;
+    private String secondName;
     private Double payRate;
     private int uniqueEMPLOYEEIDENTIFIER;
 
-    public Employee(employeeType ePassed, String namePassed) {
+    public Employee(employeeType ePassed, String firstNamePassed, String secondNamePassed) {
         this.eT = ePassed;
-        this.name = namePassed;
+        this.firstName = firstNamePassed;
+        this.secondName = secondNamePassed;
         switch (ePassed){
             case HOURLY_EMPLOYEE:
                 payRate = 8.20;
@@ -53,10 +57,17 @@ public class Employee {
         return eT;
     }
 
-    public String getName(){
-        return name;
+    public String getFirstName(){
+        return firstName;
     }
 
+    public String getSecondName(){
+        return secondName;
+    }
+
+    public String getFullName(){
+        return firstName + " " + secondName;
+    }
     public Double getPayRate(){
         return payRate;
     }
