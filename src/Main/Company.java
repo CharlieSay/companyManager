@@ -7,7 +7,8 @@ import java.util.Map;
 
 public class Company {
 
-    //Adding purely for new github work testing.
+
+    
 
    // public static HashMap<String,Main.Employee> EmployeeTable = new HashMap<String,Main.Employee>();
     public static HashMap<Integer,Employee> EmployeeTable = new HashMap<Integer,Employee>();
